@@ -117,40 +117,13 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--foco);outline-of
 .aviso.bien{border-left-color:var(--verde)}
 .req::after{content:" *";color:var(--ladrillo)}
 
-/* ---------- resultados ---------- */
-.kpis{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:14px}
-.kpi{background:var(--panel);border:1px solid var(--linea);border-radius:3px;padding:10px 12px}
-.kpi .v{font:700 26px/1 var(--disp);color:var(--verde);font-variant-numeric:tabular-nums}
-.kpi .k{font-size:11px;color:var(--tinta-2);text-transform:uppercase;letter-spacing:.05em;margin-top:3px}
-.statfila{display:grid;grid-template-columns:minmax(150px,1.5fr) 58px 1fr 76px;gap:10px;align-items:center;
-  padding:7px 0;border-bottom:1px solid var(--linea-2)}
-.statfila:last-child{border-bottom:0}
-.statfila .nom{font-size:12.5px}
-.statfila .n{font-size:11px;color:var(--tinta-2);font-variant-numeric:tabular-nums}
-.statfila .med{text-align:right;font:600 14px/1 var(--cuerpo);font-variant-numeric:tabular-nums}
-.barra{position:relative;height:16px}
-.barra .rango{position:absolute;top:7px;height:2px;background:var(--linea);left:0;right:0}
-.barra .iqr{position:absolute;top:3px;height:10px;background:var(--verde-claro);border:1px solid var(--verde)}
-.barra .mediana{position:absolute;top:0;width:2px;height:16px;background:var(--verde)}
-.barra.m2 .iqr{background:color-mix(in srgb,var(--ambar) 30%,transparent);border-color:var(--ambar)}
-.barra.m2 .mediana{background:var(--ambar)}
-.freq{display:grid;gap:4px}
-.freqfila{display:grid;grid-template-columns:minmax(120px,1.2fr) 1fr 48px;gap:8px;align-items:center;font-size:12.5px}
-.freqbar{height:11px;background:var(--linea-2);position:relative}
-.freqbar i{position:absolute;inset:0 auto 0 0;background:var(--verde);display:block}
-.freqfila .p{text-align:right;font-variant-numeric:tabular-nums;font-size:11.5px;color:var(--tinta-2)}
-.leyenda{display:flex;gap:14px;font-size:11.5px;color:var(--tinta-2);margin-top:6px;flex-wrap:wrap}
-.leyenda span{display:inline-flex;align-items:center;gap:5px}
-.sw{width:11px;height:11px;border:1px solid var(--verde);background:var(--verde-claro);display:inline-block}
-.sw.b{border-color:var(--ambar);background:color-mix(in srgb,var(--ambar) 30%,transparent)}
-.envios{width:100%;border-collapse:collapse;font-size:12.5px}
-.envios th{text-align:left;font:600 11px/1.2 var(--cuerpo);color:var(--tinta-2);text-transform:uppercase;
-  letter-spacing:.04em;border-bottom:1px solid var(--linea);padding:6px 8px}
-.envios td{border-bottom:1px solid var(--linea-2);padding:6px 8px}
-.pill{display:inline-block;padding:1px 8px;border-radius:9px;font-size:11px;font-weight:600}
-.pill.p1{background:var(--verde-claro);color:var(--verde)}
-.pill.p2{background:color-mix(in srgb,var(--ambar) 25%,transparent);color:var(--ambar)}
-.vacio{padding:26px 14px;text-align:center;color:var(--tinta-2);font-size:13px}
+/* ---------- pantalla de gracias ---------- */
+.gracias{background:var(--panel);border:1px solid var(--linea);border-radius:3px;
+  padding:34px 24px;text-align:center;margin-top:18px}
+.gracias .tick{width:52px;height:52px;border-radius:50%;background:var(--verde);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;font:700 26px/1 var(--disp);margin-bottom:14px}
+.gracias h2{font-size:19px;color:var(--verde);margin-bottom:8px}
+.gracias p{margin:0 auto 6px;max-width:52ch;font-size:13.5px;color:var(--tinta-2)}
 .pie{margin-top:26px;padding-top:12px;border-top:1px solid var(--linea);font-size:11.5px;color:var(--tinta-2)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -164,21 +137,14 @@ img{max-width:100%}
 
 <script>
 /* =====================================================================
-   CONFIGURACIÓN — lo único que hay que tocar para alojar esta página
+   CONFIGURACIÓN
    ---------------------------------------------------------------------
-   ENDPOINT vacío:
-     la encuesta funciona sin servidor. Las respuestas quedan guardadas
-     en el navegador de quien la completa y se exportan a Excel desde la
-     pestaña Resultados. Sirve para que un técnico cargue entrevistas en
-     su notebook, incluso sin internet.
-
-   ENDPOINT con la URL de una app web de Google Apps Script:
-     cada envío se escribe en la planilla del proyecto y la pestaña
-     Resultados muestra el acumulado de todos los que respondieron.
-     El archivo BRECHAS_endpoint.gs que acompaña esta página crea
-     ese servicio en cuatro pasos.
+   ENDPOINT: URL de la aplicación web de Google Apps Script que recibe
+   las respuestas y las escribe en la planilla del proyecto, en el Drive
+   de FAgro. El servicio SOLO ACEPTA ESCRITURA: esta página no puede leer
+   ni descargar lo que responden otros.
    ===================================================================== */
-const ENDPOINT = "https://script.google.com/macros/s/AKfycbyTaooRTuX1ldUXTqU0OMlFDeOMd0LBwLHfCaUxPspY7F22BD2TECrEJo1kgb2OpiI/exec";   //  ej.: "https://script.google.com/macros/s/AKfy.../exec"
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbyTaooRTuX1ldUXTqU0OMlFDeOMd0LBwLHfCaUxPspY7F22BD2TECrEJo1kgb2OpiI/exec";
 </script>
 
 
@@ -196,13 +162,8 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbyTaooRTuX1ldUXTqU0OMl
 document.getElementById("logoBre").src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABaCAYAAAACcWsdAAAdFElEQVR42u1deZwcVbX+TndPJiyBQAB5gMgjLBpAQQKC7C4syv4ElUVRAVkUFR+LC4qiPjfcEFGfD1AIGkFAFFkF2RQIyxNlDSLBiAKGByEhmZnu/t4fdQ59plJddau7ZzIz3O/3q98k3V23bp177rlnu+cCERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERowWJJIhIg6S04Q0CgIgwUmlMj13W3J4QYyc9IlClZHt0v00TsNkpUUlWMvpQ5h39cykizS5pU83pAwP7xoL7G90yoR9DEWmUeK+OaaRtSJv3s8+aZdsPaLdXY1tRmhWNY8fv0sl7i0g9cOya41F4jUkNa6wQVSdydaSZbTm+W6aQIrkSgFUBrARgEoA6gBcBLAXwgogsTY9ViKCbSLQbC5PdxtDTXj9bE8AU410dt6UAnheRodTYjSvBJd0OGsk1AOyixKkEPK+pq06f/n+JTgYA+D8Ac1IDUC2aDK4vrwOwqX78IoB+nXBM9Y0Zmp0AGNT7mgAeF5GHU4MbvDKT7AdwEIDF2g9JPZsB9IL2RdxlbQwCmAzgehF5uswkStOU5LoAdgCwK4CdVFitogKrpn1YYgILwI0AfgXgPhH5S7vJk/P8GoDdAKzuNJCK46GFAFYGMFdE7iBZKaK744F99d4hbc/aHNSxWBHAPSLyaCeCx/qivPY6pUktg6fs34PanztE5JFeCbs0TUjuBmBnAAcAWC8lsAa0nwsAXA/gSgA3iMhA6BybCKtMTf+eyN7iHpIXKeOlNa5cu53knB72YynJm0h+heQWJfpidDmYo4NP+ucWMbn1n6SQ3Jfk5SSf6fDZC0nOJrmTp4/zo2RqziS3DWz/hpRfJs88A8lXB7Z7lb+vrH+I5NQOaPZPklNC3ifUAlFaH0ny9g7G7k8kv0pyTccb8nIQWEeRrOsEr3d5NVNEnUPyrUUEdYz0v9rOYA/64rGE5PkkNy8SWo4uh2s7Az3oS9Zl9P5SiMDyfSZ5AMlbUu9YJzlEsqFX041H012NNjS6heSeaSHSRrBsnmonfRnN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";
 document.getElementById("logoPio").src="data:image/png;base64,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";
 </script>
-  <div class="tabs" role="tablist">
-    <button class="tab" id="tabForm" role="tab" aria-selected="true" aria-controls="panForm">Completar encuesta</button>
-    <button class="tab" id="tabRes" role="tab" aria-selected="false" aria-controls="panRes">Resultados <span class="n" id="cuenta">0</span></button>
-  </div>
-
   <!-- ================= FORMULARIO ================= -->
-  <div id="panForm" role="tabpanel" aria-labelledby="tabForm">
+  <div id="panForm">
     <div id="estadoDb"></div>
     <div id="form"></div>
     <div class="acciones">
@@ -212,13 +173,23 @@ document.getElementById("logoPio").src="data:image/png;base64,iVBORw0KGgoAAAANSU
     </div>
   </div>
 
-  <!-- ================= RESULTADOS ================= -->
-  <div id="panRes" role="tabpanel" aria-labelledby="tabRes" hidden>
-    <div id="res"></div>
+  <!-- ================= CONFIRMACIÓN ================= -->
+  <div id="panGracias" hidden>
+    <div class="gracias">
+      <div class="tick">&#10003;</div>
+      <h2>Respuesta registrada</h2>
+      <p>Gracias por participar del Proyecto BRECHAS Uruguay. Su respuesta quedó guardada
+         en la base del proyecto.</p>
+      <p>Si siembra maíz de 1ª y de 2ª, complete el formulario una vez por cada modalidad.</p>
+      <div class="acciones" style="justify-content:center">
+        <button class="btn" id="otra">Cargar otra respuesta</button>
+      </div>
+    </div>
   </div>
 
-  <p class="pie">Los datos se procesan de forma agregada y anónima en el marco del Proyecto BRECHAS Uruguay.
-  Las medianas y cuartiles se calculan sobre las respuestas cargadas hasta el momento.</p>
+  <p class="pie">Proyecto BRECHAS Uruguay · Pioneer – Rutilan. La información se procesa de forma
+  agregada y anónima: no se difunden datos individuales de productores ni la localización de las chacras.
+  Los resultados del estudio se pondrán a disposición de quienes participen.</p>
 </div>
 
 <script>
@@ -581,7 +552,6 @@ construir();
 /* ===================================================================
    Envío y almacenamiento
    =================================================================== */
-let RESPUESTAS=[],puedoBorrar=false;
 
 function recolectar(){
   const r={_ts:new Date().toISOString()};
@@ -624,9 +594,10 @@ $("#enviar").addEventListener("click",async()=>{
   $("#enviar").disabled=true; aviso("Guardando…");
   try{
     await guardarRespuesta(r);
-    await refrescar();
-    aviso("Respuesta guardada. ¡Gracias!");
-    setTimeout(()=>{if(confirm("Respuesta guardada.\n\n¿Querés limpiar el formulario para cargar otra?"))limpiar();},250);
+    aviso("");
+    $("#panForm").hidden = true;
+    $("#panGracias").hidden = false;
+    window.scrollTo({top:0});
   }catch(e){
     aviso("No se pudo guardar: "+(e&&e.message?e.message:"error desconocido"),"mal");
   }finally{$("#enviar").disabled=false;}
@@ -644,435 +615,37 @@ function limpiar(){
 $("#limpiar").addEventListener("click",()=>{if(confirm("¿Limpiar todo el formulario?"))limpiar();});
 
 /* ===================================================================
-   Estadísticos
+   Envío al servicio del proyecto
+   La página SOLO ESCRIBE: no puede leer ni descargar respuestas.
+   Los datos viven en la planilla de Drive del Proyecto BRECHAS y el
+   acceso se gobierna con los permisos de esa planilla.
    =================================================================== */
-function cuantil(a,q){
-  if(!a.length)return null;
-  const s=[...a].sort((x,y)=>x-y);
-  const p=(s.length-1)*q, lo=Math.floor(p), hi=Math.ceil(p);
-  return lo===hi?s[lo]:s[lo]+(s[hi]-s[lo])*(p-lo);
-}
-function resumenNum(vals){
-  const a=vals.filter(v=>v!=null&&isFinite(v));
-  if(!a.length)return null;
-  return{n:a.length,min:Math.min(...a),p25:cuantil(a,.25),med:cuantil(a,.5),p75:cuantil(a,.75),max:Math.max(...a)};
-}
-const VARS_NUM=[
- ["rend_prom","Rendimiento promedio","kg/ha"],["rend_min","Rendimiento chacra más baja","kg/ha"],
- ["rend_max","Rendimiento chacra más alta","kg/ha"],["area_ha","Área de maíz","ha"],
- ["densidad","Densidad de siembra","pl/ha"],["poblacion","Población lograda","pl/ha"],
- ["barbecho_dias","Días de barbecho","días"],["anios_agric","Años de agricultura","años"],
- ["rm","Madurez relativa","RM"],["p_bray","P Bray","ppm"],["mo","Materia orgánica","%"],["ph","pH",""],
- ["N_total","N total aplicado","kg/ha"],["P_total","P₂O₅ total aplicado","kg/ha"],
- ["K_total","K₂O total aplicado","kg/ha"],["S_total","S total aplicado","kg/ha"],
- ["n_aplicaciones","Aplicaciones de fertilizante","nº"],
- ["herb_barb_n","Aplicaciones herbicida barbecho","nº"],["insect_n","Aplicaciones de insecticida","nº"],
- ["fung_n","Aplicaciones de fungicida","nº"]
-];
-const VARS_CAT=[
- ["laboreo","Sistema de laboreo"],["antecesor","Cultivo antecesor"],["rastrojo","Destino del rastrojo"],
- ["cserv","Usa cultivo de servicio"],["metodo_rend","Determinación del rendimiento"],
- ["entre_filas","Distancia entre filas"],["metodo_siembra","Método de siembra"],
- ["ciclo","Ciclo del híbrido"],["evento","Tecnología del evento"],
- ["analisis_suelo","Análisis de suelo"],["dx_n","Diagnóstico de N"],
- ["preem","Usa preemergente"],["posem","Usa posemergente"],
- ["resistencias","Malezas resistentes"],["monitoreo","Monitoreo"],["cambio","Cambio de manejo prioritario"]
-];
-const VARS_MULTI=[
- ["criterio_n","Criterio de dosis de N"],["criterio_p","Criterio de dosis de P"],
- ["criterio_fecha","Qué define la fecha de siembra"],["criterio_hib","Criterio de elección del híbrido"],
- ["trat_semilla","Tratamiento de semilla"],["chich_manejo","Manejo de chicharrita"],
- ["enmiendas","Enmiendas y orgánicos"],["impedimento","Impedimento para el cambio"]
-];
-const VARS_RANK=[["maleza","Malezas principales"],["plaga","Plagas principales"],["enfermedad","Enfermedades principales"]];
-const MODS=["Maíz de 1ª","Maíz de 2ª / tardío"];
-
-/* ===================================================================
-   Panel de resultados
-   =================================================================== */
-function pintarResultados(){
-  const c=$("#res"); c.innerHTML="";
-  const n1=RESPUESTAS.filter(r=>r.modalidad===MODS[0]).length;
-  const n2=RESPUESTAS.filter(r=>r.modalidad===MODS[1]).length;
-  $("#cuenta").textContent=RESPUESTAS.length;
-
-  const k=el("div","kpis");
-  [[RESPUESTAS.length,"respuestas cargadas"],[n1,"maíz de 1ª"],[n2,"maíz de 2ª / tardío"],
-   [new Set(RESPUESTAS.map(r=>(r.productor||"").trim().toLowerCase()).filter(Boolean)).size,"productores distintos"]
-  ].forEach(([v,t])=>{
-    const d=el("div","kpi"); d.appendChild(el("div","v",String(v))); d.appendChild(el("div","k",t)); k.appendChild(d);
-  });
-  c.appendChild(k);
-
-  const acc=el("div","acciones");
-  const bx=el("button","btn","Descargar Excel");
-  bx.addEventListener("click",exportar);
-  acc.appendChild(bx);
-  const msgX=el("span",null,""); msgX.id="msgX"; msgX.style.fontSize="12.5px"; acc.appendChild(msgX);
-  c.appendChild(acc);
-
-  if(!RESPUESTAS.length){
-    const s=el("section","sec");
-    s.appendChild(el("div","vacio","Todavía no hay respuestas cargadas. Las medianas aparecen acá apenas se envíe la primera."));
-    c.appendChild(s); return;
-  }
-
-  /* --- numéricas --- */
-  const s1=el("section","sec");
-  const h1=el("header"); h1.appendChild(el("span","num","▮")); h1.appendChild(el("h2",null,"Variables numéricas — mediana, cuartiles y rango"));
-  s1.appendChild(h1);
-  const cu1=el("div","cuerpo"); cu1.style.gap="0";
-  const ley=el("div","leyenda");
-  ley.innerHTML='<span><i class="sw"></i> maíz de 1ª: caja P25–P75, línea = mediana</span>'+
-    '<span><i class="sw b"></i> maíz de 2ª / tardío</span><span>La barra fina va del mínimo al máximo.</span>';
-  cu1.appendChild(ley);
-  VARS_NUM.forEach(([id,nom,u])=>{
-    MODS.forEach((mod,mi)=>{
-      const vals=RESPUESTAS.filter(r=>r.modalidad===mod).map(r=>num(r[id]));
-      const st=resumenNum(vals); if(!st)return;
-      const f=el("div","statfila");
-      f.appendChild(el("div","nom",nom+(u?" ("+u+")":"")+" — "+(mi?"2ª":"1ª")));
-      f.appendChild(el("div","n","n="+st.n));
-      const b=el("div","barra"+(mi?" m2":""));
-      const span=(st.max-st.min)||1;
-      const pc=v=>((v-st.min)/span*100);
-      b.innerHTML='<i class="rango"></i>'+
-        '<i class="iqr" style="left:'+pc(st.p25).toFixed(1)+'%;width:'+Math.max(1,pc(st.p75)-pc(st.p25)).toFixed(1)+'%"></i>'+
-        '<i class="mediana" style="left:'+pc(st.med).toFixed(1)+'%"></i>';
-      b.title="mín "+fmt(st.min)+" · P25 "+fmt(st.p25)+" · mediana "+fmt(st.med)+" · P75 "+fmt(st.p75)+" · máx "+fmt(st.max);
-      f.appendChild(b);
-      f.appendChild(el("div","med",fmt(st.med,st.med<10?1:0)));
-      cu1.appendChild(f);
-    });
-  });
-  s1.appendChild(cu1); c.appendChild(s1);
-
-  /* --- categóricas --- */
-  const s2=el("section","sec");
-  const h2=el("header"); h2.appendChild(el("span","num","▮")); h2.appendChild(el("h2",null,"Variables categóricas — frecuencia de respuesta"));
-  s2.appendChild(h2);
-  const cu2=el("div","cuerpo");
-  const pintarFreq=(titulo,conteo,total)=>{
-    if(!total)return;
-    const box=el("div","campo");
-    box.appendChild(el("div","lab",titulo));
-    const g=el("div","freq");
-    Object.entries(conteo).sort((a,b)=>b[1]-a[1]).slice(0,8).forEach(([k2,v])=>{
-      const f=el("div","freqfila");
-      f.appendChild(el("div",null,k2));
-      const bb=el("div","freqbar");
-      const i=document.createElement("i"); i.style.width=(v/total*100).toFixed(1)+"%";
-      bb.appendChild(i); f.appendChild(bb);
-      f.appendChild(el("div","p",Math.round(v/total*100)+"% ("+v+")"));
-      g.appendChild(f);
-    });
-    box.appendChild(g); cu2.appendChild(box);
-  };
-  VARS_CAT.forEach(([id,nom])=>{
-    const co={},vv=RESPUESTAS.map(r=>r[id]).filter(Boolean);
-    vv.forEach(v=>co[v]=(co[v]||0)+1);
-    pintarFreq(nom,co,vv.length);
-  });
-  VARS_MULTI.forEach(([id,nom])=>{
-    const co={};let base=0;
-    RESPUESTAS.forEach(r=>{const a=r[id];if(Array.isArray(a)&&a.length){base++;a.forEach(v=>co[v]=(co[v]||0)+1);}});
-    pintarFreq(nom+" (respuesta múltiple)",co,base);
-  });
-  VARS_RANK.forEach(([id,nom])=>{
-    const co={};let base=0;
-    RESPUESTAS.forEach(r=>{[1,2,3].forEach(k2=>{const v=r[id+"_"+k2];if(v){co[v]=(co[v]||0)+(4-k2);base+=(4-k2);}});});
-    pintarFreq(nom+" (ponderado: 1º=3, 2º=2, 3º=1)",co,base);
-  });
-  s2.appendChild(cu2); c.appendChild(s2);
-
-  /* --- envíos --- */
-  const s3=el("section","sec");
-  const h3=el("header"); h3.appendChild(el("span","num","▮")); h3.appendChild(el("h2",null,"Respuestas cargadas"));
-  s3.appendChild(h3);
-  const cu3=el("div","cuerpo");
-  const sc=el("div","tabla-scroll");
-  const t=document.createElement("table"); t.className="envios";
-  t.innerHTML="<thead><tr><th>Fecha</th><th>Productor / asesor</th><th>Grupo</th><th>Modalidad</th>"+
-    "<th style='text-align:right'>Rendimiento</th>"+(puedoBorrar?"<th></th>":"")+"</tr></thead>";
-  const tb=document.createElement("tbody");
-  [...RESPUESTAS].sort((a,b)=>(b._ts||"").localeCompare(a._ts||"")).forEach(r=>{
-    const tr=document.createElement("tr");
-    const f=r._ts?new Date(r._ts).toLocaleDateString("es-UY",{day:"2-digit",month:"2-digit",year:"2-digit"}):"—";
-    tr.appendChild(el("td",null,f));
-    tr.appendChild(el("td",null,r.productor||"—"));
-    tr.appendChild(el("td",null,(r.grupo||"—").replace(/\s*\(.*\)/,"")));
-    const td=document.createElement("td");
-    const p=el("span","pill "+(r.modalidad===MODS[1]?"p2":"p1"),r.modalidad===MODS[1]?"2ª":"1ª");
-    td.appendChild(p); tr.appendChild(td);
-    const tdr=el("td",null,fmt(num(r.rend_prom))+" kg/ha");
-    tdr.style.textAlign="right"; tdr.style.fontVariantNumeric="tabular-nums";
-    tr.appendChild(tdr);
-    if(puedoBorrar){
-      const tdb=document.createElement("td"); tdb.style.textAlign="right";
-      const b=el("button","btn sec2 chico","Borrar");
-      b.addEventListener("click",async()=>{
-        if(!confirm("¿Borrar esta respuesta? No se puede deshacer."))return;
-        try{await borrarRespuesta(r._id);await refrescar();}catch(e){}
-      });
-      tdb.appendChild(b); tr.appendChild(tdb);
-    }
-    tb.appendChild(tr);
-  });
-  t.appendChild(tb); sc.appendChild(t); cu3.appendChild(sc);
-  s3.appendChild(cu3); c.appendChild(s3);
-}
-
-/* ===================================================================
-   Excel (.xlsx escrito a mano: ZIP almacenado + SpreadsheetML)
-   =================================================================== */
-const TCRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
-function crc32(b){let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=TCRC[(c^b[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
-function zip(archivos){
-  const enc=new TextEncoder(),locales=[],centrales=[];let off=0;
-  archivos.forEach(f=>{
-    const nom=enc.encode(f.n),dat=enc.encode(f.d),crc=crc32(dat);
-    const lh=new Uint8Array(30+nom.length),dv=new DataView(lh.buffer);
-    dv.setUint32(0,0x04034b50,true);dv.setUint16(4,20,true);dv.setUint16(6,0x0800,true);
-    dv.setUint16(8,0,true);dv.setUint16(10,0,true);dv.setUint16(12,22561,true);
-    dv.setUint32(14,crc,true);
-    dv.setUint32(18,dat.length,true);dv.setUint32(22,dat.length,true);
-    dv.setUint16(26,nom.length,true);lh.set(nom,30);
-    locales.push(lh,dat);
-    const ch=new Uint8Array(46+nom.length),cv=new DataView(ch.buffer);
-    cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);
-    cv.setUint16(8,0x0800,true);cv.setUint16(10,0,true);
-    cv.setUint16(12,0,true);cv.setUint16(14,22561,true);cv.setUint32(16,crc,true);
-    cv.setUint32(20,dat.length,true);cv.setUint32(24,dat.length,true);
-    cv.setUint16(28,nom.length,true);cv.setUint32(42,off,true);ch.set(nom,46);
-    centrales.push(ch);
-    off+=lh.length+dat.length;
-  });
-  const cdSize=centrales.reduce((a,b)=>a+b.length,0);
-  const eo=new Uint8Array(22),ev=new DataView(eo.buffer);
-  ev.setUint32(0,0x06054b50,true);ev.setUint16(8,archivos.length,true);
-  ev.setUint16(10,archivos.length,true);ev.setUint32(12,cdSize,true);ev.setUint32(16,off,true);
-  const total=[...locales,...centrales,eo];
-  const len=total.reduce((a,b)=>a+b.length,0),out=new Uint8Array(len);let p=0;
-  total.forEach(b=>{out.set(b,p);p+=b.length;});
-  return out;
-}
-const esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g,"");
-function col(i){let s="";i++;while(i>0){const m=(i-1)%26;s=String.fromCharCode(65+m)+s;i=(i-m-1)/26;}return s;}
-function hoja(filas){
-  let x='<?xml version="1.0" encoding="UTF-8"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>';
-  filas.forEach((f,ri)=>{
-    x+='<row r="'+(ri+1)+'">';
-    f.forEach((v,ci)=>{
-      const ref=col(ci)+(ri+1);
-      if(typeof v==="number"&&isFinite(v))x+='<c r="'+ref+'"><v>'+v+'</v></c>';
-      else if(v==null||v==="")x+='';
-      else x+='<c r="'+ref+'" t="inlineStr"><is><t xml:space="preserve">'+esc(v)+'</t></is></c>';
-    });
-    x+='</row>';
-  });
-  return x+'</sheetData></worksheet>';
-}
-function construirXlsx(hojas){
-  const files=[
-   {n:"[Content_Types].xml",d:'<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'+
-     hojas.map((h,i)=>'<Override PartName="/xl/worksheets/sheet'+(i+1)+'.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>').join("")+'</Types>'},
-   {n:"_rels/.rels",d:'<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'},
-   {n:"xl/workbook.xml",d:'<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'+
-     hojas.map((h,i)=>'<sheet name="'+esc(h.nombre)+'" sheetId="'+(i+1)+'" r:id="rId'+(i+1)+'"/>').join("")+'</sheets></workbook>'},
-   {n:"xl/_rels/workbook.xml.rels",d:'<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+
-     hojas.map((h,i)=>'<Relationship Id="rId'+(i+1)+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet'+(i+1)+'.xml"/>').join("")+'</Relationships>'}
-  ];
-  hojas.forEach((h,i)=>files.push({n:"xl/worksheets/sheet"+(i+1)+".xml",d:hoja(h.filas)}));
-  return zip(files);
-}
-
-function columnasRespuestas(){
-  const cols=[["_ts","Fecha y hora"]];
-  SECCIONES.forEach(s=>s.campos.forEach(c=>{
-    if(c.tipo==="rank")[1,2,3].forEach(k=>cols.push([c.id+"_"+k,c.l+" — "+k+"º"]));
-    else cols.push([c.id,c.l]);
-  }));
-  cols.push(["N_total","N total aplicado (kg/ha)"],["P_total","P2O5 total aplicado (kg/ha)"],
-    ["K_total","K2O total aplicado (kg/ha)"],["S_total","S total aplicado (kg/ha)"],
-    ["n_aplicaciones","Aplicaciones de fertilizante (nº)"]);
-  return cols;
-}
-const ES_NUM=new Set(VARS_NUM.map(v=>v[0]).concat(["cserv_pct","dens_min","dens_max","siembra_dia"]));
-
-async function exportar(){
-  const m=document.getElementById("msgX");
-  if(!RESPUESTAS.length){if(m){m.textContent="Todavía no hay respuestas para exportar.";m.style.color="var(--ladrillo)";}return;}
-  if(m){m.textContent="Armando el archivo…";m.style.color="var(--tinta-2)";}
-
-  const cols=columnasRespuestas();
-  const h1=[cols.map(c=>c[1])];
-  RESPUESTAS.forEach(r=>{
-    h1.push(cols.map(([id])=>{
-      const v=r[id];
-      if(Array.isArray(v))return v.join(" | ");
-      if(ES_NUM.has(id)){const n=num(v);return n==null?"":n;}
-      if(typeof v==="number")return v;
-      return v==null?"":String(v);
-    }));
-  });
-
-  const h2=[["ID respuesta","Fecha","Modalidad","Productor","Nº aplicación","Producto","Fórmula",
-    "Dosis (kg producto/ha)","N (kg/ha)","P2O5 (kg/ha)","K2O (kg/ha)","S (kg/ha)","Momento","Método / colocación"]];
-  RESPUESTAS.forEach(r=>(r.fert||[]).forEach((f,i)=>{
-    h2.push([r._id||"",r._ts||"",r.modalidad||"",r.productor||"",i+1,f.prod||"",f.form||"",
-      f.dosis??"",f.N??"",f.P??"",f.K??"",f.S??"",f.mom||"",f.met||""]);
-  }));
-
-  const h3=[["RESUMEN ESTADÍSTICO — Proyecto BRECHAS Uruguay"],
-    ["Generado",new Date().toLocaleString("es-UY")],["Respuestas totales",RESPUESTAS.length],[],
-    ["Variables numéricas"],
-    ["Variable","Unidad","Modalidad","n","Mínimo","P25","Mediana","P75","Máximo"]];
-  VARS_NUM.forEach(([id,nom,u])=>{
-    MODS.forEach(mod=>{
-      const st=resumenNum(RESPUESTAS.filter(r=>r.modalidad===mod).map(r=>num(r[id])));
-      if(st)h3.push([nom,u,mod,st.n,+st.min.toFixed(2),+st.p25.toFixed(2),+st.med.toFixed(2),+st.p75.toFixed(2),+st.max.toFixed(2)]);
-    });
-    const stT=resumenNum(RESPUESTAS.map(r=>num(r[id])));
-    if(stT)h3.push([nom,u,"Todas",stT.n,+stT.min.toFixed(2),+stT.p25.toFixed(2),+stT.med.toFixed(2),+stT.p75.toFixed(2),+stT.max.toFixed(2)]);
-  });
-  h3.push([],["Variables categóricas"],["Variable","Opción","Modalidad","n","% de respuestas"]);
-  const freqFila=(nom,id,multi)=>{
-    MODS.concat(["Todas"]).forEach(mod=>{
-      const sub=mod==="Todas"?RESPUESTAS:RESPUESTAS.filter(r=>r.modalidad===mod);
-      const co={};let base=0;
-      sub.forEach(r=>{
-        const v=r[id];
-        if(multi){if(Array.isArray(v)&&v.length){base++;v.forEach(x=>co[x]=(co[x]||0)+1);}}
-        else if(v){base++;co[v]=(co[v]||0)+1;}
-      });
-      Object.entries(co).sort((a,b)=>b[1]-a[1]).forEach(([k,n])=>
-        h3.push([nom,k,mod,n,+(n/base*100).toFixed(1)]));
-    });
-  };
-  VARS_CAT.forEach(([id,nom])=>freqFila(nom,id,false));
-  VARS_MULTI.forEach(([id,nom])=>freqFila(nom+" (múltiple)",id,true));
-  h3.push([],["Ranking ponderado (1º=3, 2º=2, 3º=1)"],["Variable","Opción","Puntaje","% del puntaje total"]);
-  VARS_RANK.forEach(([id,nom])=>{
-    const co={};let tot=0;
-    RESPUESTAS.forEach(r=>[1,2,3].forEach(k=>{const v=r[id+"_"+k];if(v){co[v]=(co[v]||0)+(4-k);tot+=(4-k);}}));
-    Object.entries(co).sort((a,b)=>b[1]-a[1]).forEach(([k,n])=>h3.push([nom,k,n,+(n/tot*100).toFixed(1)]));
-  });
-
-  const bytes=construirXlsx([
-    {nombre:"Respuestas",filas:h1},
-    {nombre:"Fertilizacion",filas:h2},
-    {nombre:"Resumen",filas:h3}
-  ]);
-  const nombre="BRECHAS_encuesta_maiz_"+new Date().toISOString().slice(0,10)+".xlsx";
-  try{
-    descargarArchivo(bytes,nombre);
-    if(m){m.textContent="Excel descargado: 3 hojas (Respuestas, Fertilización, Resumen).";m.style.color="var(--verde)";}
-  }catch(e){
-    if(m){m.textContent="No se pudo generar la descarga.";m.style.color="var(--ladrillo)";}
-  }
-}
-
-/* ===================================================================
-   Pestañas
-   =================================================================== */
-function tab(cual){
-  const f=cual==="form";
-  $("#tabForm").setAttribute("aria-selected",String(f));
-  $("#tabRes").setAttribute("aria-selected",String(!f));
-  $("#panForm").hidden=!f; $("#panRes").hidden=f;
-  window.scrollTo({top:0});
-}
-$("#tabForm").addEventListener("click",()=>tab("form"));
-$("#tabRes").addEventListener("click",()=>tab("res"));
-
-/* ===================================================================
-   Almacenamiento — versión autoalojada
-   Dos modos, según la constante ENDPOINT de arriba:
-     · vacío        -> las respuestas quedan en este navegador (localStorage)
-     · con una URL  -> cada envío se manda a la planilla de Google
-   =================================================================== */
-const LS_KEY="brechas_respuestas_v1";
-
-function leerLocal(){
-  try{const t=localStorage.getItem(LS_KEY);return t?JSON.parse(t):[];}catch(e){return[];}
-}
-function escribirLocal(a){
-  try{localStorage.setItem(LS_KEY,JSON.stringify(a));return true;}catch(e){return false;}
-}
-
 async function guardarRespuesta(r){
-  if(ENDPOINT){
-    const res=await fetch(ENDPOINT,{
-      method:"POST",
-      headers:{"Content-Type":"text/plain;charset=utf-8"},  // evita el preflight CORS
-      body:JSON.stringify({accion:"guardar",respuesta:r})
-    });
-    const j=await res.json();
-    if(!j||!j.ok)throw new Error(j&&j.error?j.error:"respuesta inesperada del servidor");
-    return;
-  }
-  const a=leerLocal();
-  r._id="loc_"+Date.now()+"_"+Math.random().toString(36).slice(2,7);
-  a.push(r);
-  if(!escribirLocal(a))throw new Error("sin espacio de almacenamiento en el navegador");
-}
-
-async function cargarRespuestas(){
-  if(ENDPOINT){
-    const res=await fetch(ENDPOINT+(ENDPOINT.indexOf("?")<0?"?":"&")+"accion=listar");
-    const j=await res.json();
-    return (j&&j.respuestas)||[];
-  }
-  return leerLocal();
-}
-
-async function borrarRespuesta(id){
-  if(ENDPOINT){
-    await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},
-      body:JSON.stringify({accion:"borrar",id:id})});
-    return;
-  }
-  escribirLocal(leerLocal().filter(r=>r._id!==id));
-}
-
-async function refrescar(){
-  try{
-    RESPUESTAS=await cargarRespuestas();
-  }catch(e){
-    RESPUESTAS=[];
-    $("#estadoDb").innerHTML='<div class="aviso mal" style="margin-top:14px">'+
-      'No se pudieron leer las respuestas guardadas. Revisá la constante ENDPOINT arriba del archivo.</div>';
-  }
-  pintarResultados();
-}
-
-/* ===================================================================
-   Descarga de archivos — anclas estándar, sin depender de claude.ai
-   =================================================================== */
-function descargarArchivo(bytes,nombre){
-  const url=URL.createObjectURL(new Blob([bytes],
-    {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}));
-  const a=document.createElement("a");
-  a.href=url; a.download=nombre; document.body.appendChild(a); a.click();
-  setTimeout(()=>{URL.revokeObjectURL(url);a.remove();},1500);
+  const res = await fetch(ENDPOINT, {
+    method:"POST",
+    headers:{"Content-Type":"text/plain;charset=utf-8"},   // evita el preflight CORS
+    body: JSON.stringify({accion:"guardar", respuesta:r})
+  });
+  const j = await res.json();
+  if(!j || !j.ok) throw new Error(j && j.error ? j.error : "respuesta inesperada del servidor");
 }
 
 /* ===================================================================
    Arranque
    =================================================================== */
-puedoBorrar=!ENDPOINT;   // en modo local cada uno administra sus propias respuestas
-pintarResultados();
+if(!ENDPOINT){
+  $("#estadoDb").innerHTML='<div class="aviso mal" style="margin-top:14px">'+
+    'Falta configurar la constante <code>ENDPOINT</code> al principio del archivo: '+
+    'sin ella el formulario no puede enviar las respuestas.</div>';
+  $("#enviar").disabled = true;
+}
 
-const bannerModo=document.createElement("div");
-bannerModo.className="aviso";
-bannerModo.style.marginTop="14px";
-bannerModo.innerHTML = ENDPOINT
-  ? 'Las respuestas se envían a la planilla del proyecto. Gracias por participar.'
-  : '<b>Modo local.</b> Las respuestas quedan guardadas en este navegador y se exportan a Excel desde la pestaña Resultados. '+
-    'Para que se envíen a una planilla compartida, completá la constante <code>ENDPOINT</code> al principio del archivo.';
-$("#estadoDb").appendChild(bannerModo);
-
-refrescar();
+$("#otra").addEventListener("click",()=>{
+  limpiar();
+  $("#panGracias").hidden = true;
+  $("#panForm").hidden = false;
+  window.scrollTo({top:0});
+});
 </script>
 
 </body>
