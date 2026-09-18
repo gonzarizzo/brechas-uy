@@ -1,0 +1,3 @@
+# Apps Script backend — kept local-only until reviewed for secrets
+# before ever being committed to this public repo.
+apps-script/
